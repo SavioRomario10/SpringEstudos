@@ -10,4 +10,8 @@ public class ProdutosapiApplication {
 		SpringApplication.run(ProdutosapiApplication.class, args);
 	}
 
+	public static void Teste(){
+		//teste de commit
+	}
+
 }
