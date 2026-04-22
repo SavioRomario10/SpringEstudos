@@ -3,12 +3,9 @@ package io.github.SavioRomario10.produtosapi.controller;
 import io.github.SavioRomario10.produtosapi.model.Produto;
 import io.github.SavioRomario10.produtosapi.repository.ProdutoRepository;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,5 +35,21 @@ public class ProdutoController {
   @GetMapping("/{id}")
   public Produto obterPorId(@PathVariable("id") String id){
     return produtoRepository.findById(id).orElse(null);
+  }
+
+  @DeleteMapping("/{id}")
+  public void deletar(@PathVariable("id") String id) {
+    produtoRepository.deleteById(id);
+  }
+
+  @PutMapping("/{id}")
+  public void atualizar(@PathVariable("id") String id, @RequestBody Produto produto) {
+    produto.setId(id);
+    produtoRepository.save(produto);
+  }
+
+  @GetMapping
+  public List<Produto> buscar(@RequestParam("nome") String nome){
+    return produtoRepository.findByNome(nome);
   }
 }
