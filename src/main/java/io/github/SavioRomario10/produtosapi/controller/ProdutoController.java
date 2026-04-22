@@ -6,11 +6,12 @@ import io.github.SavioRomario10.produtosapi.repository.ProdutoRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.UUID;
 
 import org.springframework.web.bind.annotation.PostMapping;
-
 
 @RestController
 @RequestMapping("/produtos")
@@ -32,5 +33,10 @@ public class ProdutoController {
     produtoRepository.save(produto);
     
     return produto;
+  }
+  
+  @GetMapping("/{id}")
+  public Produto obterPorId(@PathVariable("id") String id){
+    return produtoRepository.findById(id).orElse(null);
   }
 }
